@@ -664,7 +664,7 @@ fn flush(py: Python<'_>, blocking: bool, recording: Option<&PyRecordingStream>) 
 // --- Time ---
 
 #[pyfunction]
-fn set_time_sequence(timeline: &str, sequence: Option<i64>, recording: Option<&PyRecordingStream>) {
+fn set_time_sequence(timeline: &str, sequence: i64, recording: Option<&PyRecordingStream>) {
     let Some(recording) = get_data_recording(recording) else {
         return;
     };
@@ -672,7 +672,7 @@ fn set_time_sequence(timeline: &str, sequence: Option<i64>, recording: Option<&P
 }
 
 #[pyfunction]
-fn set_time_seconds(timeline: &str, seconds: Option<f64>, recording: Option<&PyRecordingStream>) {
+fn set_time_seconds(timeline: &str, seconds: f64, recording: Option<&PyRecordingStream>) {
     let Some(recording) = get_data_recording(recording) else {
         return;
     };
@@ -680,11 +680,34 @@ fn set_time_seconds(timeline: &str, seconds: Option<f64>, recording: Option<&PyR
 }
 
 #[pyfunction]
-fn set_time_nanos(timeline: &str, nanos: Option<i64>, recording: Option<&PyRecordingStream>) {
+fn set_time_nanos(timeline: &str, nanos: i64, recording: Option<&PyRecordingStream>) {
     let Some(recording) = get_data_recording(recording) else {
         return;
     };
     recording.set_time_nanos(timeline, nanos);
+}
+
+#[pyfunction]
+fn delete_timeline(timeline: &str, recording: Option<&PyRecordingStream>) {
+    delete_temporal_timeline(timeline, recording);
+    delete_sequential_timeline(timeline, recording);
+}
+
+#[pyfunction]
+fn delete_sequential_timeline(timeline: &str, recording: Option<&PyRecordingStream>) {
+    let Some(recording) = get_data_recording(recording) else {
+        return;
+    };
+    recording.disable_timeline(re_log_types::Timeline::new_sequence(timeline));
+}
+
+#[pyfunction]
+fn delete_temporal_timeline(timeline: &str, recording: Option<&PyRecordingStream>) {
+    let Some(recording) = get_data_recording(recording) else {
+        return;
+    };
+    recording.disable_timeline(re_log_types::Timeline::new_temporal(timeline));
+    recording.disable_timeline(re_log_types::Timeline::new_sequence(timeline));
 }
 
 #[pyfunction]

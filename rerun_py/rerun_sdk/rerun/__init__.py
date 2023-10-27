@@ -240,7 +240,7 @@ def _init_recording_stream() -> None:
 
     recording_stream_patch(
         [connect, save, disconnect, memory_recording, serve, spawn]
-        + [set_time_sequence, set_time_seconds, set_time_nanos, reset_time]
+        + [set_time_sequence, set_time_seconds, set_time_nanos, disable_timeline, reset_time]
         + [fn for name, fn in getmembers(sys.modules[__name__], isfunction) if name.startswith("log_")]
     )
 

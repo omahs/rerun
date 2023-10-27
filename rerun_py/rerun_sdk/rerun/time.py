@@ -111,11 +111,34 @@ def set_time_nanos(timeline: str, nanos: int | None, recording: RecordingStream 
     bindings.set_time_nanos(timeline, nanos, recording=recording)
 
 
+def disable_timeline(timeline: str, recording: RecordingStream | None = None) -> None:
+    """
+    Clear time information for the specified timeline on this thread.
+
+    Used for all subsequent logging on the same thread,
+    until the next call to [`rerun.set_time_nanos`][] or [`rerun.set_time_seconds`][].
+
+    Parameters
+    ----------
+    timeline : str
+        The name of the timeline to clear the time for.
+    recording:
+        Specifies the [`rerun.RecordingStream`][] to use.
+        If left unspecified, defaults to the current active data recording, if there is one.
+        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+
+    """
+
+    recording = RecordingStream.to_native(recording)
+
+    bindings.reset_time(recording=recording)
+
+
 def reset_time(recording: RecordingStream | None = None) -> None:
     """
     Clear all timeline information on this thread.
 
-    This is the same as calling `set_time_*` with `None` for all of the active timelines.
+    This is the same as calling `disable_timeline` for all of the active timelines.
 
     Used for all subsequent logging on the same thread,
     until the next call to [`rerun.set_time_nanos`][] or [`rerun.set_time_seconds`][].
