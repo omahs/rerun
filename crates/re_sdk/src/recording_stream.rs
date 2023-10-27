@@ -1365,7 +1365,7 @@ impl ThreadInfo {
         Self::with(|ti| ti.now(rid))
     }
 
-    fn set_thread_time(rid: &StoreId, timeline: Timeline, time_int: Option<TimeInt>) {
+    fn set_thread_time(rid: &StoreId, timeline: Timeline, time_int: TimeInt) {
         Self::with(|ti| ti.set_time(rid, timeline, time_int));
     }
 
@@ -1397,15 +1397,11 @@ impl ThreadInfo {
         timepoint
     }
 
-    fn set_time(&mut self, rid: &StoreId, timeline: Timeline, time_int: Option<TimeInt>) {
-        if let Some(time_int) = time_int {
-            self.timepoints
-                .entry(rid.clone())
-                .or_default()
-                .insert(timeline, time_int);
-        } else if let Some(timepoint) = self.timepoints.get_mut(rid) {
-            timepoint.remove(&timeline);
-        }
+    fn set_time(&mut self, rid: &StoreId, timeline: Timeline, time_int: TimeInt) {
+        self.timepoints
+            .entry(rid.clone())
+            .or_default()
+            .insert(timeline, time_int);
     }
 
     fn unset_time(&mut self, rid: &StoreId, timeline: Timeline) {
@@ -1452,7 +1448,7 @@ impl RecordingStream {
         let timepoint = timepoint.into();
 
         for (timeline, time) in timepoint {
-            ThreadInfo::set_thread_time(&this.info.store_id, timeline, Some(time));
+            ThreadInfo::set_thread_time(&this.info.store_id, timeline, time);
         }
     }
 
@@ -1471,11 +1467,7 @@ impl RecordingStream {
     /// - [`Self::set_time_nanos`]
     /// - [`Self::disable_timeline`]
     /// - [`Self::reset_time`]
-    pub fn set_time_sequence(
-        &self,
-        timeline: impl Into<TimelineName>,
-        sequence: impl Into<Option<i64>>,
-    ) {
+    pub fn set_time_sequence(&self, timeline: impl Into<TimelineName>, sequence: impl Into<i64>) {
         let Some(this) = &*self.inner else {
             re_log::warn_once!("Recording disabled - call to set_time_sequence() ignored");
             return;
@@ -1484,7 +1476,7 @@ impl RecordingStream {
         ThreadInfo::set_thread_time(
             &this.info.store_id,
             Timeline::new(timeline, TimeType::Sequence),
-            sequence.into().map(TimeInt::from),
+            sequence.into().into(),
         );
     }
 
@@ -1503,7 +1495,7 @@ impl RecordingStream {
     /// - [`Self::set_time_nanos`]
     /// - [`Self::disable_timeline`]
     /// - [`Self::reset_time`]
-    pub fn set_time_seconds(&self, timeline: &str, seconds: impl Into<Option<f64>>) {
+    pub fn set_time_seconds(&self, timeline: &str, seconds: impl Into<f64>) {
         let Some(this) = &*self.inner else {
             re_log::warn_once!("Recording disabled - call to set_time_seconds() ignored");
             return;
@@ -1512,9 +1504,7 @@ impl RecordingStream {
         ThreadInfo::set_thread_time(
             &this.info.store_id,
             Timeline::new(timeline, TimeType::Time),
-            seconds
-                .into()
-                .map(|secs| Time::from_seconds_since_epoch(secs).into()),
+            Time::from_seconds_since_epoch(seconds.into()).into(),
         );
     }
 
@@ -1533,7 +1523,7 @@ impl RecordingStream {
     /// - [`Self::set_time_seconds`]
     /// - [`Self::disable_timeline`]
     /// - [`Self::reset_time`]
-    pub fn set_time_nanos(&self, timeline: &str, ns: impl Into<Option<i64>>) {
+    pub fn set_time_nanos(&self, timeline: &str, ns: impl Into<i64>) {
         let Some(this) = &*self.inner else {
             re_log::warn_once!("Recording disabled - call to set_time_nanos() ignored");
             return;
@@ -1542,7 +1532,7 @@ impl RecordingStream {
         ThreadInfo::set_thread_time(
             &this.info.store_id,
             Timeline::new(timeline, TimeType::Time),
-            ns.into().map(|ns| Time::from_ns_since_epoch(ns).into()),
+            Time::from_ns_since_epoch(ns.into()).into(),
         );
     }
 
