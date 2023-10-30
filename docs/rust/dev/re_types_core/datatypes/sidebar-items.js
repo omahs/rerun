@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["float32","uint32","utf8","utf8_ext"],"struct":["Float32","UInt32","Utf8"]};

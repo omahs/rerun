@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Float32","UInt32","Utf8"]};

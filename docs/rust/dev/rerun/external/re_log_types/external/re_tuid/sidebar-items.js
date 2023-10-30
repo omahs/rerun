@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["delegate_arrow_tuid"],"mod":["arrow","external"],"struct":["Tuid"]};

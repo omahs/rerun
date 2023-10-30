@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["annotations","create_component_ui_registry","image_meaning_for_entity","show_zoomed_image_region","show_zoomed_image_region_area_outline","temporary_style_ui_for_component","tensor_summary_ui_grid_contents","ui_visible_components"],"mod":["item_ui"],"trait":["DataUi","EntityDataUi"]};

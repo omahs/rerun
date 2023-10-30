@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["auto_space_views","space_view_component","space_view_component_ext","space_view_maximized","space_view_maximized_ext","viewport_layout","viewport_layout_ext"],"struct":["AutoSpaceViews","SpaceViewComponent","SpaceViewMaximized","ViewportLayout"]};

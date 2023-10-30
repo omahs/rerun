@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["load_gltf_from_buffer"]};
