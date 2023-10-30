@@ -70,7 +70,7 @@
 <span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>std::error::Error&gt;&gt; {
     re_memory::accounting_allocator::turn_on_tracking_if_env_var(<span class="string">&quot;RERUN_TRACK_ALLOCATIONS&quot;</span>);
 
-    <span class="kw">let </span>rec = rerun::RecordingStreamBuilder::new(<span class="string">&quot;test_image_memory&quot;</span>).spawn()<span class="question-mark">?</span>;
+    <span class="kw">let </span>rec = rerun::RecordingStreamBuilder::new(<span class="string">&quot;rerun_example_image_memory&quot;</span>).spawn()<span class="question-mark">?</span>;
     log_images(<span class="kw-2">&amp;</span>rec).unwrap();
 
     <span class="prelude-val">Ok</span>(())
