@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1698610269779,
+  "lastUpdate": 1698630408677,
   "repoUrl": "https://github.com/rerun-io/rerun",
   "entries": {
     "Sizes": [
@@ -989,6 +989,75 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/rerun-io/rerun/commit/b7f404a1ae71880803340bda9ac111f8aa91990a"
         },
         "date": 1698610253032,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Wasm",
+            "value": "15.5",
+            "unit": "MiB"
+          },
+          {
+            "name": "JS",
+            "value": "113.32",
+            "unit": "kiB"
+          },
+          {
+            "name": "arkit_scenes.rrd",
+            "value": "40.38",
+            "unit": "MiB"
+          },
+          {
+            "name": "detect_and_track_objects.rrd",
+            "value": "55.21",
+            "unit": "MiB"
+          },
+          {
+            "name": "dicom_mri.rrd",
+            "value": "63.36",
+            "unit": "MiB"
+          },
+          {
+            "name": "dna.rrd",
+            "value": "0.62",
+            "unit": "MiB"
+          },
+          {
+            "name": "human_pose_tracking.rrd",
+            "value": "54.43",
+            "unit": "MiB"
+          },
+          {
+            "name": "plots.rrd",
+            "value": "0.19",
+            "unit": "MiB"
+          },
+          {
+            "name": "structure_from_motion.rrd",
+            "value": "6.85",
+            "unit": "MiB"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "emil.ernerfeldt@gmail.com",
+            "name": "Emil Ernerfeldt",
+            "username": "emilk"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "651678d2393fe9c8020cd8d09aef3ced06f287e1",
+          "message": "Lint app ids (#4046)\n\n### What\r\nAll our examples should use `rerun_example_` as the prefix for the app\r\nids. We detect this specially in analytics.\r\n\r\n### Checklist\r\n* [x] I have read and agree to [Contributor\r\nGuide](https://github.com/rerun-io/rerun/blob/main/CONTRIBUTING.md) and\r\nthe [Code of\r\nConduct](https://github.com/rerun-io/rerun/blob/main/CODE_OF_CONDUCT.md)\r\n* [x] I've included a screenshot or gif (if applicable)\r\n* [x] I have tested [demo.rerun.io](https://demo.rerun.io/pr/4046) (if\r\napplicable)\r\n* [x] The PR title and labels are set such as to maximize their\r\nusefulness for the next release's CHANGELOG\r\n\r\n- [PR Build Summary](https://build.rerun.io/pr/4046)\r\n- [Docs\r\npreview](https://rerun.io/preview/9b72a92d7d9acc6c77388bf7ab86dc3bab8bda94/docs)\r\n<!--DOCS-PREVIEW-->\r\n- [Examples\r\npreview](https://rerun.io/preview/9b72a92d7d9acc6c77388bf7ab86dc3bab8bda94/examples)\r\n<!--EXAMPLES-PREVIEW-->\r\n- [Recent benchmark results](https://ref.rerun.io/dev/bench/)\r\n- [Wasm size tracking](https://ref.rerun.io/dev/sizes/)",
+          "timestamp": "2023-10-30T02:10:54+01:00",
+          "tree_id": "daa1f615cf4811151d49dd91d3e13ac3bddc795a",
+          "url": "https://github.com/rerun-io/rerun/commit/651678d2393fe9c8020cd8d09aef3ced06f287e1"
+        },
+        "date": 1698630392198,
         "tool": "customSmallerIsBetter",
         "benches": [
           {
